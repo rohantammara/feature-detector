@@ -23,9 +23,9 @@ Iy_2 = Iy.^2;
 Ixy = Ix.*Iy;
 [m, n] = size(Ix);
 
-% Initialize Corner matrices
-C_h = zeros(m, n);
-C_st = zeros(m, n);
+% Initialize Feature matrices
+F_h = zeros(m, n);
+F_st = zeros(m, n);
 
 % Calculate R-value and check if greater than threshold
 for i = 1:m
@@ -36,13 +36,15 @@ for i = 1:m
         R_h = abs(det(M) - k*(trace(M)^2));
         % Shi-Tomasi R-value
         R_st = min([M(1, 1) M(2, 2)]);
-        % Check for corner
+        % Check for features
         if R_h > threshold_h
-            C_h(i, j) = 1;
+            F_h(i, j) = 1;
         end
         if R_st > threshold_st
-            C_st(i, j) = 1;
+            F_st(i, j) = 1;
         end
     end
 end
-imshowpair(C_h, C_st, 'montage');
+
+% Display images
+imshowpair(F_h, F_st, 'montage');
