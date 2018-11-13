@@ -1,3 +1,5 @@
+clc;
+
 % Convert image to grayscale
 img = rgb2gray(table);
 
